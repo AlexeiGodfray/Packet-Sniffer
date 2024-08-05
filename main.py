@@ -34,4 +34,11 @@ def ipv4_packet(data):
 def ipv4(addr):
     return ','.join(map(str, addr))
 
+# Unpacks ICMP Packet 
+def icmp_packet(data):
+    icmp_type, code, checksum = struct.unpack('! B B H', data[:4])
+    return icmp_type, code, checksum, data[4:]
+
+#Unpacks TCP Segment
+
 main()
