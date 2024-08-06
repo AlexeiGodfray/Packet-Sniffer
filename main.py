@@ -40,5 +40,16 @@ def icmp_packet(data):
     return icmp_type, code, checksum, data[4:]
 
 #Unpacks TCP Segment
+def tcp_segment(data):
+    (src_port, dest_port, sequence, acknowldgement, offset_reversed_flag) = struct.unpack('! H H L L H', data[:14])
+    offset = (offset_reversed_flag >> 12) * 4
+    flag_urg = (offset_reversed_flag & 32) >> 5
+    flag_ack = (offset_reversed_flag & 16) >> 4
+    flag_psh = (offset_reversed_flag & 8) >> 3
+    flag_rst = (offset_reversed_flag & 4) >> 2
+    flag_syn = (offset_reversed_flag & 2) >> 1
+    flag_fin = (offset_reversed_flag & 1)
+    return src_port, dest_port, sequence, acknowldgement, flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin, data[offset:]
+
 
 main()
