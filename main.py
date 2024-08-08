@@ -98,7 +98,7 @@ def tcp_segment(data):
 #Unpacks UDP segment
 def udp_segment(data):
     src_port, dest_port, size = struct.unpack('! H H 2x H', data[:8])
-    return src_port, dest_port, size[8:]
+    return src_port, dest_port, size, data[8:]
 
 #Formating Multi-line Data
 def format_multi_line(prefix, string, size=80):
