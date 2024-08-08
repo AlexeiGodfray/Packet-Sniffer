@@ -51,5 +51,9 @@ def tcp_segment(data):
     flag_fin = (offset_reversed_flag & 1)
     return src_port, dest_port, sequence, acknowldgement, flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin, data[offset:]
 
+#Unpacks UDP segment
+def udp_segment(data):
+    src_port, dest_port, size = struct.unpack('! H H 2x H', data[:8])
+    return src_port, dest_port, size[8:]
 
 main()
