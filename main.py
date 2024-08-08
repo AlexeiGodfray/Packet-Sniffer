@@ -33,6 +33,16 @@ def main():
                 print(TAB_2 + 'Type: {}, Code: {}, Checksum {}, '.format(icmp_type, code, checksum))
                 print(TAB_2 + 'Data: ')
                 print(format_multi_line(DATA_TAB_3, data))
+            # TCP
+            elif proto == 6:
+                (src_port, dest_port, sequence, acknowldgement, flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin, data) = tcp_segment(data)
+                print(TAB_1 + 'TCP Segment: ')
+                print(TAB_2 + 'Source Port: {}, Destination Port: {}'.format(src_port, dest_port))
+                print(TAB_2 + 'Sequence: {}, Ackowledgment: {}'.format(sequence, acknowldgement))
+                print(TAB_2 + 'Flags: ')
+                print(TAB_3 + 'URG: {}, ACK: {}, PSH: {}, RST: {}, SYN: {}, FIN:{}'.format(flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin))
+                print(TAB_2 + 'Data: ')
+                print(format_multi_line(DATA_TAB_3, data))
 
 #unpack ethrent frame
 def ethernet_frame(data):
