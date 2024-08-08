@@ -101,12 +101,19 @@ def udp_segment(data):
     return src_port, dest_port, size, data[8:]
 
 #Formating Multi-line Data
+import textwrap
+
+# Format multi-line data for readability
 def format_multi_line(prefix, string, size=80):
-    size = len(prefix)
+    # Ensure the size is appropriate for the content
     if isinstance(string, bytes):
+        # Convert bytes to a readable hexadecimal string
         string = ''.join(r'\x{:02x}'.format(byte) for byte in string)
-        if size %2:
-            size = 1
+    # Adjust line length to accommodate prefixes
+    size -= len(prefix)
+    # Wrap the text to the specified size and prefix each line
     return '\n'.join([prefix + line for line in textwrap.wrap(string, size)])
+
+
 
 main()
