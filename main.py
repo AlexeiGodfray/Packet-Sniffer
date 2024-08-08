@@ -43,6 +43,16 @@ def main():
                 print(TAB_3 + 'URG: {}, ACK: {}, PSH: {}, RST: {}, SYN: {}, FIN:{}'.format(flag_urg, flag_ack, flag_psh, flag_rst, flag_syn, flag_fin))
                 print(TAB_2 + 'Data: ')
                 print(format_multi_line(DATA_TAB_3, data))
+            #UDP
+            elif proto == 17:
+                src_port, dest_port, length, data = udp_segment(data)
+                print(TAB_1 + 'UDP Segment: ')
+                print(TAB_2 + 'Source Port: {}, Destination Port: {}, Length {}'.format(src_port, dest_port, length))
+            #Other 
+            else: 
+                print(TAB_1 + 'Data: ')
+                print(format_multi_line(DATA_TAB_2, data))
+
 
 #unpack ethrent frame
 def ethernet_frame(data):
